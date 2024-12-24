@@ -115,7 +115,7 @@ kubectl apply -f kubernetes/deployment.yaml
 
 ## 开发团队
 
-- 维护者：[Your Name]
+- 维护者：Kintong
 - 贡献者：欢迎提交 PR
 
 ## 许可证
