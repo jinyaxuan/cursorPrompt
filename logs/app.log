@@ -1,0 +1,22 @@
+
+> ai-ui-design-prompt-generator@0.1.0 dev
+> NODE_OPTIONS='--no-warnings' next dev
+
+ ⚠ You are using a non-standard "NODE_ENV" value in your environment. This creates inconsistencies in the project and is strongly advised against. Read more: https://nextjs.org/docs/messages/non-standard-node-env
+   ▲ Next.js 14.0.3
+   - Local:        http://localhost:3000
+   - Environments: .env.local
+
+ ✓ Ready in 1718ms
+ ○ Compiling / ...
+ ✓ Compiled / in 2.3s (444 modules)
+ ✓ Compiled in 221ms (229 modules)
+ ✓ Compiled /api/generate in 229ms (237 modules)
+请求参数: {
+  description: '一个接入kimi的插件，接入前端之后可以分析当前前端页面的数据',
+  framework: 'flask',
+  analysisType: '架构设计分析'
+}
+准备调用 Kimi API...
+Kimi API 响应状态: 200
+Kimi API 响应成功
