@@ -1,0 +1,63 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ai-engineering-assistant
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: ai-engineering-assistant
+  template:
+    metadata:
+      labels:
+        app: ai-engineering-assistant
+    spec:
+      containers:
+      - name: ai-engineering-assistant
+        image: ${REGISTRY}/${NAMESPACE}/ai-engineering-assistant:${IMAGE_TAG}
+        ports:
+        - containerPort: 3000
+        env:
+        - name: KIMI_API_KEY
+          valueFrom:
+            secretKeyRef:
+              name: app-secrets
+              key: kimi-api-key
+        resources:
+          requests:
+            cpu: 100m
+            memory: 128Mi
+          limits:
+            cpu: 500m
+            memory: 512Mi
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: ai-engineering-assistant
+spec:
+  type: ClusterIP
+  ports:
+  - port: 80
+    targetPort: 3000
+  selector:
+    app: ai-engineering-assistant
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: ai-engineering-assistant
+  annotations:
+    kubernetes.io/ingress.class: nginx
+spec:
+  rules:
+  - host: ${INGRESS_HOST}
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: ai-engineering-assistant
+            port:
+              number: 80 

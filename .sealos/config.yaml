@@ -1,0 +1,31 @@
+name: ai-engineering-assistant
+version: v1
+kind: Application
+
+# 构建配置
+build:
+  workdir: .
+  docker:
+    file: Dockerfile
+    context: .
+
+# 部署配置
+deploy:
+  - path: kubernetes/deployment.yaml
+    replace:
+      - name: REGISTRY
+        value: "{{ .registry }}"
+      - name: NAMESPACE
+        value: "{{ .namespace }}"
+      - name: IMAGE_TAG
+        value: "{{ .imageTag }}"
+      - name: INGRESS_HOST
+        value: "{{ .env.INGRESS_HOST }}"
+
+# 环境变量
+env:
+  - name: KIMI_API_KEY
+    secret: true
+    description: "Kimi API Key"
+  - name: INGRESS_HOST
+    description: "Ingress Host" 
